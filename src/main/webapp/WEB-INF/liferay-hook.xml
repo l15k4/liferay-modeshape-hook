@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hook PUBLIC "-//Liferay//DTD Hook 6.1.0//EN" "http://www.liferay.com/dtd/liferay-hook_6_1_0.dtd">
+
+<hook>
+
+	<!-- JCRFactory is part of portal-impl, so that I have to create custom JCRStore instead :-/  -->
+
+	<portal-properties>portal.properties</portal-properties>	
+	
+	<!--
+ 	<service>
+		<service-type>com.liferay.portal.jcr.JCRFactory</service-type>
+		<service-impl>com.liferay.portal.jcr.modeshape.JCRFactoryImpl</service-impl>
+	</service>
+	 -->
+</hook>

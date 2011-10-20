@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns:mode="http://www.modeshape.org/1.0"
+	xmlns:jcr="http://www.jcp.org/jcr/1.0">
+
+	<mode:sources jcr:primaryType="nt:unstructured">
+		<mode:source jcr:name="inMemorySource"
+			mode:classname="org.modeshape.graph.connector.inmemory.InMemoryRepositorySource"
+			mode:retryLimit="3">
+			<defaultWorkspaceName>liferay</defaultWorkspaceName>
+			<predefinedWorkspaceNames>system</predefinedWorkspaceNames>
+			<predefinedWorkspaceNames>liferay</predefinedWorkspaceNames>
+		</mode:source>
+		<mode:source jcr:name="fileSystemSource"
+			mode:classname="org.modeshape.connector.filesystem.FileSystemSource"
+			mode:workspaceRootPath="/opt/liferay/bundles/data/modeshape/home"
+			mode:creatingWorkspacesAllowed="true" mode:updatesAllowed="true"
+			mode:extraPropertiesBehavior="store">
+			<defaultWorkspaceName>liferay</defaultWorkspaceName>
+			<predefinedWorkspaceNames>system</predefinedWorkspaceNames>
+			<predefinedWorkspaceNames>liferay</predefinedWorkspaceNames>
+		</mode:source>
+		<mode:source jcr:name="jpaSource"
+			mode:classname="org.modeshape.connector.store.jpa.JpaSource"
+			mode:model="Simple" mode:dialect="org.hibernate.dialect.HSQLDialect"
+			mode:driverClassName="org.hsqldb.jdbcDriver" mode:username="sa"
+			mode:password="" mode:url="jdbc:hsqldb:mem:target"
+			mode:maximumConnectionsInPool="1" mode:referentialIntegrityEnforced="true"
+			mode:largeValueSizeInBytes="10000" mode:retryLimit="3"
+			mode:compressData="false" mode:showSql="false"
+			mode:autoGenerateSchema="create" mode:creatingWorkspacesAllowed="true">
+			<defaultWorkspaceName>liferay</defaultWorkspaceName>
+			<predefinedWorkspaceNames>system</predefinedWorkspaceNames>
+			<predefinedWorkspaceNames>liferay</predefinedWorkspaceNames>
+		</mode:source>
+	</mode:sources>
+
+	<!-- Define the JCR repositories -->
+	<mode:repositories>
+		<mode:repository jcr:name="inMemoryRepo">
+			<mode:source>inMemorySource</mode:source>
+			<anonymousUserRoles jcr:PrimaryType="mode:option"
+				mode:value="admin,readwrite" />
+			<!-- Define any custom node types. Importing CND files via JcrConfiguration 
+				is equivalent to specifying here. -->
+			<mode:option jcr:name="systemSourceName" mode:value="system@inMemorySource" />
+		</mode:repository>
+		<mode:repository jcr:name="fileSystemRepo">
+			<anonymousUserRoles jcr:PrimaryType="mode:option"
+				mode:value="admin,readwrite" />
+			<mode:source>fileSystemSource</mode:source>
+			<!-- Define any custom node types. Importing CND files via JcrConfiguration 
+				is equivalent to specifying here. -->
+			<mode:option jcr:name="systemSourceName" mode:value="system@fileSystemSource" />
+		</mode:repository>
+		<mode:repository jcr:name="jpaRepo">
+			<anonymousUserRoles jcr:PrimaryType="mode:option"
+				mode:value="admin,readwrite" />
+			<mode:source>jpaSource</mode:source>
+			<!-- Define any custom node types. Importing CND files via JcrConfiguration 
+				is equivalent to specifying here. -->
+			<mode:option jcr:name="systemSourceName" mode:value="system@jpaSource" />
+		</mode:repository>
+	</mode:repositories>
+</configuration>
