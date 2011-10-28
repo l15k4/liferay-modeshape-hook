@@ -9,7 +9,7 @@
 	<version>1.0</version>
 
 	<properties>
-		<modeshape.version>2.6.0.Beta2</modeshape.version>
+		<modeshape.version>2.6.0.Final</modeshape.version>
 		<liferay.auto.deploy.dir>/opt/liferay/bundles/deploy</liferay.auto.deploy.dir>
 		<liferay.version>6.1.0-SNAPSHOT</liferay.version>
 	</properties>
@@ -33,6 +33,18 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>test-output</directory>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
