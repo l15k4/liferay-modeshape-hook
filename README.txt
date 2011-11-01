@@ -6,7 +6,7 @@ http://www.liferay.com/community/forums/-/message_boards/message/11151950
 
 But that was too intrusive, using hook is much more friendly. Although in Liferay there are a few ways how it might be done :
 
-1. Using LiferayRepository and JCRStore (which is what is this hook about)
+1. Using LiferayRepository and JCRStore (which is what this hook is about)
 
    In an ideal world JCRFactory interface would be public (part of portal-service.jar) and the hook would have to implement only JCRFactoryImpl  to obtain session from in JCRStore. But it isn't so it implements both custom JCRStore and JCRFactoryImpl + a few other classes.
 
